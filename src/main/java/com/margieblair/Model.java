@@ -1,4 +1,4 @@
-package main.java.com.margieblair;
+package com.margieblair;
 
 public class Model {
 
