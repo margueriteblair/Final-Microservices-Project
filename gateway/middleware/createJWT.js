@@ -4,7 +4,8 @@ const secret = process.env.JWT_SECRET;
 
 module.exports = (req, res, next) => {
     try {
-        req.createdJWT = jwt.sign({_id: req.userId}, secret, {expiresIn: "4h"});
+        req.createdJWT = jwt.sign({_id: req._id}, secret, {expiresIn: "4h"});
+        console.log("hello world");
         next();
     } catch (err) {
         console.log(err.message);

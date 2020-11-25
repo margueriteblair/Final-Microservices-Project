@@ -11,17 +11,20 @@ module.exports = async (req, res, next) => {
         const query ={}
         query[field] = credential.trim();
 
-        const foundUser = await User.findOne(query, {password: 1});
-        console.log(foundUser);
-        if (foundUser === null) return res.status(400).json({message: "Email and/or password don't match. No user found."});
+        const foundUser = await User.findOne(query, {password: 1, email: 1, username: 1});
+        if (foundUser === null) {
+            res.status(400).json({message: "Email and/or password don't match. No user found."});
+            return;
+        }
         const passwordMatches = bcrypt.compare(password, foundUser.password);
-        if (!passwordMatches) return res.status(400).json({message: "Email and/or password don't match. Password failure."})
+        if (!passwordMatches) {
+            res.status(400).json({message: "Email and/or password don't match. No user found."});
+            return;
+        }
         req.userId = foundUser._id;
-
         next();
 
     } catch (err) {
-        
         res.status(500).json({message: err.message, customMessage: "Validate login failed"});
     }
 }
