@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
             const cleanUserData = {
                 username: username.trim(),
                 email: email.trim(),
-                password: password.trim();
+                password: password.trim()
             }
             req.sanitized = cleanUserData;
             next();
