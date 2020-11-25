@@ -15,4 +15,13 @@ router.patch("/login", validateLogin, createJWT, (req, res) => {
     } catch (error) {
         res.status(500).json({message: error.message});
     }
+});
+
+router.post("/register", validateUser, passwordEncryption, async (req, res) => {
+    try {
+        await User.create(req.body);
+        res.status(201).json({message: "success in creating new user!"});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
 })
