@@ -13,7 +13,7 @@ router.patch("/login", validateLogin, createJWT, (req, res) => {
     try {
         // res.json({token: req.createJWT});
         console.log("good job????")
-        res.status(200).json({token: req.createJWT});
+        res.status(200).json({token: req.createdJWT, message: "woohooo!"});
         
     } catch (error) {
         res.status(500).json({message: error.message});
