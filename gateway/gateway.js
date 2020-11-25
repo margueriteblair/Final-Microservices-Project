@@ -1,5 +1,7 @@
 const express = require("express");
 require("dotenv").config();
+const mongoose = require("mongoose");
+const validator = require("validator");
 
 //an API gateway is an entry point to other services
 //nodejs works well for api gateways even if your microservice architecture is developed in a different language
@@ -9,7 +11,15 @@ require("dotenv").config();
 //there's both cookie and token based authentication
 const app = express();
 const routes = require("./routes")
-const PORT = 3000;
+const PORT = process.env.PORT;
+const URI = process.env.MONGO;
+
+if (typeof(URI) === "string") {
+    mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
+        if (error) console.error("Error connecting to MongoDB: " + error.message);
+        else console.log("Server connected to DB");
+    })
+}
 
 app.use(express.json());
 
