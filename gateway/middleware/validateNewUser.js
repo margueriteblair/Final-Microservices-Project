@@ -26,7 +26,25 @@ module.exports = async (req, res, next) => {
                 errorsList.push({key: "username", error: "Username is already in use."})
             }
         }
-        next();
+
+        if (password === undefined || password.trim().length === 0) {
+            errorsList.push({key: "password", error: "Password is required."});
+        } else if (password !== undefined && password.length < 7) {
+            errorsList.push({key: "password", error: "Password did not meet requirements"});
+        }
+
+        if (errorsList.length > 0) {
+            res.status(400).json({"validation errors": errorsList});
+        } else {
+            const cleanUserData = {
+                username: username.trim(),
+                email: email.trim(),
+                password: password.trim();
+            }
+            req.sanitized = cleanUserData;
+            next();
+        }
+        
     } catch (err) {
         res.status(500).json({message: err.message});
     }
