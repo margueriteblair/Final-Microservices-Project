@@ -19,6 +19,8 @@ if (typeof(URI) === "string") {
         if (error) console.error("Error connecting to MongoDB: " + error.message);
         else console.log("Server connected to DB");
     })
+} else {
+    console.error("Invalid connection to MongoDB");
 }
 
 app.use(express.json());
