@@ -11,6 +11,7 @@ const validator = require("validator");
 //there's both cookie and token based authentication
 const app = express();
 const routes = require("./routes")
+const userRouter = require("./routes/userRouter");
 const PORT = process.env.PORT;
 const URI = process.env.MONGO;
 
@@ -26,6 +27,7 @@ if (typeof(URI) === "string") {
 app.use(express.json());
 
 app.use("/", routes)
+app.use("/user", userRouter);
 
 app.listen(PORT, () => {
     console.log("Gateway has started on port " + PORT);

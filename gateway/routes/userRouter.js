@@ -12,6 +12,7 @@ router.patch("/login", validateLogin, createJWT, (req, res) => {
     const {email, username, password} = req.body;
     try {
         res.json({token: req.createJWT});
+        res.status(200).json({message: "good job so far"});
     } catch (error) {
         res.status(500).json({message: error.message});
     }
@@ -25,3 +26,5 @@ router.post("/register", validateUser, passwordEncryption, async (req, res) => {
         res.status(500).json({message: error.message});
     }
 })
+
+module.exports = router;

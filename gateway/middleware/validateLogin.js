@@ -7,6 +7,7 @@ module.exports = async (req, res, next) => {
     try {
         const {password, credential} = req.body; //for the login, the user will only provide a password and either their username or email
         const field = validator.isEmail(credential) ? "email" : "username";
+        console.log("field is good")
 
         const foundUser = await User.findOne({field: credential}, {password: 1});
 
@@ -21,6 +22,7 @@ module.exports = async (req, res, next) => {
         next();
 
     } catch (err) {
-        res.status(500).json({message: err.message});
+        
+        res.status(500).json({message: err.message, customMessage: "Validate login failed"});
     }
 }
