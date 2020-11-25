@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon gateway.js",
+    "dev": "nodemon gateway.js"
   },
   "keywords": [],
   "author": "Marguerite Blair",
@@ -16,6 +16,7 @@
     "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
