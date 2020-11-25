@@ -18,6 +18,8 @@ module.exports = async (req, res, next) => {
 
         req.userId = foundUser._id;
 
+        next();
+
     } catch (err) {
         res.status(500).json({message: err.message});
     }
