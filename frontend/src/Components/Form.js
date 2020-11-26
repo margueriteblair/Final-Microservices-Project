@@ -13,7 +13,8 @@ export default function Form(props) {
             >
 
                 {
-                    <Input
+                    Array.isArray(props.inputs) ? props.inputs.map(inProps =>{
+                        <Input
                     name={inProps.name}
                     placeholder={inProps.placeholder}
                     type={inProps.type}
@@ -22,6 +23,8 @@ export default function Form(props) {
                     onChange={inProps.onChange}
                     key={inProps.name}
                     ></Input>
+                    }) : 'Dev Warning! No inputs, check code.'
+                    
                 }
             </form>
             <button text="Submit" onClick={buttonOnClick}></button>
