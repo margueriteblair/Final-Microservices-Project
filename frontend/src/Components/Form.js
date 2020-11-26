@@ -24,6 +24,7 @@ export default function Form(props) {
                     ></Input>
                 }
             </form>
+            <button text="Submit" onClick={buttonOnClick}></button>
         </div>
     )
 }
