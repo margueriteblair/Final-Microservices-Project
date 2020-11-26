@@ -1,5 +1,5 @@
 const {default: axios} =  require('axios')
-const baseURL = 'http://localhost:3399'
+const baseURL = 'http://localhost:3000'
 const validator = require('validator')
 
 module.exports = {
