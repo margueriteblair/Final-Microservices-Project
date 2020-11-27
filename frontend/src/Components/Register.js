@@ -15,7 +15,7 @@ export default function Register() {
             inputs={regInputs}
             submitFunction={regRequest}
             ></Form>
-            <button text="Already have an Account? Login" onClick={()=>{window.location = loginLink}}></button>
+            <button onClick={()=>{window.location = loginLink}}>Already Have an Account? Login</button>
         </div>
     )
 }

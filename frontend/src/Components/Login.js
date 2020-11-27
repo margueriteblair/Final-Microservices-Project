@@ -18,12 +18,12 @@ export default function Login(props) {
             {props.loggedIn ? (
                 <div>
                     <p>Already signed in!</p>
-                    <button text="Return home" onClick={() => {window.location = '/'}}></button>
+                    <button onClick={() => {window.location = '/'}}>Return to Homepage</button>
                 </div>
             ) : (
                 <div>
                     <p>No Account?</p>
-                    <button text="Register Button" onClick={() => {window.location=regLink}}></button>
+                    <button onClick={() => {window.location=regLink}}>Register Here</button>
                 </div>
             )}
         </div>
