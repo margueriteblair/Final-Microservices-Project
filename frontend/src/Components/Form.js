@@ -14,7 +14,7 @@ export default function Form(props) {
 
                 {
                     Array.isArray(props.inputs) ? props.inputs.map(inProps =>{
-                        <Input
+                    <Input
                     name={inProps.name}
                     placeholder={inProps.placeholder}
                     type={inProps.type}
@@ -27,7 +27,7 @@ export default function Form(props) {
                     
                 }
             </form>
-            <button text="Submit" onClick={buttonOnClick}></button>
+            <button onClick={buttonOnClick}>Submit</button>
         </div>
     )
 }
