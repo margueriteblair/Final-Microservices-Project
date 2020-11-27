@@ -13,7 +13,7 @@ export default function Register() {
             id="registerForm"
             title="Register"
             inputs={regInputs}
-            submitFunction={regRequest}
+            submitFunc={regRequest}
             ></Form>
             <button onClick={()=>{window.location = loginLink}}>Already Have an Account? Login</button>
         </div>

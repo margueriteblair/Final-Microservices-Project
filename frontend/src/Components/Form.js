@@ -1,5 +1,6 @@
 import React from 'react'
 import Input from './Input';
+import Button from './Button';
 
 export default function Form(props) {
     const buttonOnClick = () => {
@@ -27,7 +28,7 @@ export default function Form(props) {
                     
                 }
             </form>
-            <button onClick={buttonOnClick}>Submit</button>
+            <Button text="Submit" onClick={buttonOnClick}></Button>
         </div>
     )
 }
