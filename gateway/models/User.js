@@ -13,6 +13,16 @@ const UserSchema = new mongoose.Schema({
         minlength: 7,
         required: true
     },
+    timestamps: {
+        createdAt: {
+            type: Date,
+            default: Date.now()
+        },
+        updatedAt: {
+            type: Date,
+            default: Date.now();
+        }
+    },
     email: {
         type: String,
         minlength: 6,
@@ -23,9 +33,6 @@ const UserSchema = new mongoose.Schema({
     emailValidated: {
         type: Boolean,
         default: false
-    },
-    isAdmin: {
-        //if we don't sanitize our user data then anyone can just make themself an admin in postman
     }
 
 })
