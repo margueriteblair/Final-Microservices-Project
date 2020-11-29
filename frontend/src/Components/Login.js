@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import Form from './Form'
-import Button from '.Button';
 
 import {loginReq} from '../utils/userRequests';
 import {loginInputs} from '../utils/userInputs';
@@ -19,7 +18,7 @@ export default function Login(props) {
             title="Login to Your Account!"
             submitFunc={loginReq}
             ></Form>
-            <Button onClick={window.location = regLink}></Button>
+            <button onClick={()=>{window.location = regLink}}>Need an Account? Register</button>
         </div>
     )
 
