@@ -20,6 +20,7 @@ router.patch("/login", validateLogin, createJWT, (req, res) => {
 router.post("/register", validateUser, passwordEncryption, async (req, res) => {
     try {
         await User.create(req.sanitized);
+        //find a way to add a JSONWebToken in there
         res.status(201).json(req.body);
     } catch (error) {
         res.status(500).json({message: error.message, error: error});
