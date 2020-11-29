@@ -28,7 +28,7 @@ module.exports = {
         }
 
         const loginUrl = baseURL + '/user/login'
-        axios.put(loginUrl, reqBody)
+        axios.patch(loginUrl, reqBody)
         .then(res => {
             console.log(res)
         })
