@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from './Form';
 import {regInputs} from '../utils/userInputs';
-import {regRequest} from '../utils/userRequests';
+import {regReq} from '../utils/userRequests';
 
 export default function Register() {
     const loginLink = '/login';
@@ -13,7 +13,7 @@ export default function Register() {
             id="registerForm"
             title="Register"
             inputs={regInputs}
-            submitFunc={regRequest}
+            submitFunc={regReq}
             ></Form>
             <button onClick={()=>{window.location = loginLink}}>Already Have an Account? Login</button>
         </div>
