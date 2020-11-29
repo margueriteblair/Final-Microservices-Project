@@ -13,6 +13,7 @@ const app = express();
 const routes = require("./routes")
 const userRouter = require("./routes/userRouter");
 const PORT = process.env.PORT;
+const logger = require("morgan");
 const URI = process.env.MONGO;
 const cors = require("cors");
 
@@ -27,6 +28,7 @@ if (typeof(URI) === "string") {
 
 app.use(express.json());
 app.use(cors());
+app.use(logger("dev"));
 
 app.use("/", routes)
 app.use("/user", userRouter);
