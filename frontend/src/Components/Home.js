@@ -15,7 +15,7 @@ export default function Home(props) {
     } else {
     return (
         <div className="homepageButtons">
-            <h1>Welcome to my application, bitch!</h1>
+            <h1>Welcome to my application!</h1>
             <button onClick={() => {window.location.href = loginLink}}>Login</button>
             <button onClick={() => {window.location.href = registerLink}}>Register</button>
         </div>
