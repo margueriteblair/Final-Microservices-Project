@@ -16,6 +16,7 @@ const PORT = process.env.PORT;
 const logger = require("morgan");
 const URI = process.env.MONGO;
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 if (typeof(URI) === "string") {
     mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
@@ -29,6 +30,7 @@ if (typeof(URI) === "string") {
 app.use(express.json());
 app.use(cors());
 app.use(logger("dev"));
+app.use(bodyParser.json());
 
 app.use("/", routes)
 app.use("/user", userRouter);
