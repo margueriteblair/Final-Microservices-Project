@@ -1,6 +1,7 @@
 const {default: axios} =  require('axios')
 const baseURL = 'http://localhost:3399'
-const validator = require('validator')
+const validator = require('validator');
+const userLogin = require('./userLogin');
 
 module.exports = {
     loginReq: (form) => {
@@ -30,7 +31,8 @@ module.exports = {
         const loginUrl = baseURL + '/user/login'
         axios.patch(loginUrl, reqBody)
         .then(res => {
-            console.log(res)
+            userLogin(res.data, "/")
+    
         })
         .catch(err => {
             if (err) {
@@ -81,7 +83,7 @@ module.exports = {
             console.log(reqBody);
             const registerURL = `${baseURL}/user/register`
             axios.post(registerURL, reqBody)
-            .then(res => {console.log(res)})
+            .then(res=> userLogin(res.data, "/"))
             .catch(error => {
                 if (error) {
                     console.log(error, error.message);

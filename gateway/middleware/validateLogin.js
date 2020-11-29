@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
             return;
         }
         req.userId = foundUser._id;
+        req.username = foundUser.username;
         next();
 
     } catch (err) {

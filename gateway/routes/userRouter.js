@@ -4,6 +4,7 @@ const passwordEncryption = require("../middleware/passwordEncryption");
 const validateLogin = require("../middleware/validateLogin");
 const createJWT = require("../middleware/createJWT");
 const validateUser = require("../middleware/validateNewUser");
+const createUser = require("../middleware/createUser");
 
 const router = express.Router();
 
@@ -17,14 +18,11 @@ router.patch("/login", validateLogin, createJWT, (req, res) => {
     }
 });
 
-router.post("/register", validateUser, passwordEncryption, async (req, res) => {
-    try {
-        await User.create(req.sanitized);
-        //find a way to add a JSONWebToken in there
-        res.status(201).json(req.body);
-    } catch (error) {
-        res.status(500).json({message: error.message, error: error});
-    }
-})
+router.post("/register", validateUser, passwordEncryption, createUser, createJWT, (req, res) => 
+        // await User.create(req.sanitized);
+        res.status(201).json({token: req.createdJWT, username: req.sanitized.username})
+
+    
+)
 
 module.exports = router;
