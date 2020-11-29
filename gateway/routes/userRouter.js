@@ -11,7 +11,6 @@ router.patch("/login", validateLogin, createJWT, (req, res) => {
     console.log(req.body);
     const {email, username, password} = req.body;
     try {
-        console.log("good job????")
         res.status(200).json({token: req.createdJWT, message: "woohooo!"});
         
     } catch (error) {
@@ -21,8 +20,8 @@ router.patch("/login", validateLogin, createJWT, (req, res) => {
 
 router.post("/register", validateUser, passwordEncryption, async (req, res) => {
     try {
-        await User.create(req.body);
-        res.status(201).json({message: "success in creating new user!"});
+        await User.create(req.sanitized);
+        res.status(201).json(req.body);
     } catch (error) {
         res.status(500).json({message: error.message, error: error});
     }

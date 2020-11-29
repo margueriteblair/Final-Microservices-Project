@@ -60,8 +60,6 @@ module.exports = {
             if (document.getElementsByName("password").value !== document.getElementsByName("password2").value) {
                 fieldErrors["password_match"] = "\nThe two passwords must match\n"
             }
-    
-    
         }
         console.log(fieldErrors)
         if (Object.keys(fieldErrors).length !== 0) {
@@ -72,7 +70,6 @@ module.exports = {
             console.log(errorStr)
             alert(errorStr)
         } else if (Object.keys(fieldErrors).length === 0) {
-            console.log('hi')
             for (const input of form) {
                 if (input.name !== "password2") {
                     reqBody[input.name] = input.value
@@ -80,7 +77,6 @@ module.exports = {
             }
             console.log(reqBody)
             const registerURL = `${baseURL}/user/register`
-
             axios.post(registerURL, reqBody)
             .then(res => {console.log(res)})
             .catch(error => {
