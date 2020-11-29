@@ -1,5 +1,6 @@
 import React from 'react'
 import useUserData from '../Hooks/useUserData';
+import userLogout from '../utils/userLogout';
 
 
 export default function Home(props) {
@@ -10,6 +11,11 @@ export default function Home(props) {
         return (
             <div>
                 <h1>Welcome, {userName}</h1>
+                <button onClick={() => {
+                    console.log("logout")
+                    window.location = '/'
+                    localStorage.setItem("userData", null); 
+                }}>Logout</button>
             </div>
         )
     } else {
