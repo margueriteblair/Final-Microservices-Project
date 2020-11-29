@@ -37,6 +37,9 @@ module.exports = {
                 console.log(err)
             }
         })
+        for (const input of form) {
+            input.value = "";
+        }
     },
 
     regReq: (form) => {
@@ -84,6 +87,9 @@ module.exports = {
                     console.log(error, error.message);
                 }
             })
+            for (const input of form) {
+                input.value = "";
+            }
         }
     }
 }
