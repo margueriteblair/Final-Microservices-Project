@@ -8,10 +8,9 @@ const validateUser = require("../middleware/validateNewUser");
 const router = express.Router();
 
 router.patch("/login", validateLogin, createJWT, (req, res) => {
-    console.log(req.body);
     const {email, username, password} = req.body;
     try {
-        res.status(200).json({token: req.createdJWT, message: "woohooo!"});
+        res.status(200).json({token: req.createdJWT, username: req.username});
         
     } catch (error) {
         res.status(500).json({message: error.message});
