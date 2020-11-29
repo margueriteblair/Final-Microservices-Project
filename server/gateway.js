@@ -10,6 +10,7 @@ const PORT = process.env.PORT;
 const logger = require("morgan");
 const URI = process.env.MONGO;
 const cors = require("cors");
+const auth = require("./routes/auth")
 
 if (typeof(URI) === "string") {
     mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
@@ -23,6 +24,7 @@ if (typeof(URI) === "string") {
 app.use(express.json());
 app.use(cors());
 app.use(logger("dev"));
+app.use("/api/auth", auth);
 
 app.use("/", routes)
 app.use("/user", userRouter);
