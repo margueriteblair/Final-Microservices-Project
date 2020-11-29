@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
                 response = await handleUserLogin(req.body.reqBody);
                 break;
             case "handleProfilePost":
-                response = await handleUserLogin(
+                response = await handleProfilePost(
                     req.body.reqBody,
                     req.header("x-auth-token")
                 );
@@ -29,3 +29,33 @@ router.post("/", async (req, res) => {
         res.status(500).json(error);
     }
 });
+
+handleUserPost = async (body) => {
+    try {
+        const res = await axios.post(`${config.authServer}/api/users`, body);
+        console.log(res.data);
+        return res;
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
+handleUserLogin = async (body) => {
+    try {
+        const res = await axios.post(`${config.authServer}/api/users/login`, body);
+        return res;
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
+handleProfilePost = async(body, authToken) => {
+    try {
+        res = await axios.post(`${config.authServer}/api/profiles`, body, {
+            headers: {"x-auth-token": authToken}
+        })
+        return res;
+    } catch (error) {
+        res.json(400).json(error);
+    }
+}
