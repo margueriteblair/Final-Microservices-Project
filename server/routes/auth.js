@@ -22,5 +22,10 @@ router.post("/", async (req, res) => {
             default:
                 return res.status(404).json({errors: {action: "invalid action"}});
         }
+        if (response.errors) throw response.errors;
+        res.json(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(error);
     }
-})
+});
