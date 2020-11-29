@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
     emailValidated: {
         type: Boolean,
         default: false
+    },
+    isListed: {
+        type: Boolean,
+        default: true
     }
 
 })
