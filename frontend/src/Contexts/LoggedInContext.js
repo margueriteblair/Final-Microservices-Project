@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {set, get} from '../utils/localStorage'
 
+export const LoggedInContext = React.createContext();
+
 export default function LoggedInContextProvider(props) {
     const [loggedIn, setLoggedIn] = useState(() => {
         return get("logged-in-status", false);
@@ -11,8 +13,8 @@ export default function LoggedInContextProvider(props) {
     }, [loggedIn])
 
     return (
-        <div>
-            
-        </div>
+        <LoggedInContext.Provider value={{loggedIn: loggedIn, setLoggedIn: setLoggedIn}}>
+            {props.children}
+        </LoggedInContext.Provider>
     )
 }
