@@ -27,17 +27,16 @@ module.exports = {
             }
         }
 
-        // const loginUrl = baseURL + '/user/login'
-        return reqBody;
-        // axios.patch(loginUrl, reqBody)
-        // .then(res => {
-        //     console.log(res)
-        // })
-        // .catch(err => {
-        //     if (err) {
-        //         console.log(err)
-        //     }
-        // })
+        const loginUrl = baseURL + '/user/login'
+        axios.patch(loginUrl, reqBody)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            if (err) {
+                console.log(err)
+            }
+        })
     },
 
     regReq: (form) => {
@@ -76,15 +75,15 @@ module.exports = {
                     reqBody[input.name] = input.value
                 }
             }
-            return reqBody;
-            // const registerURL = `${baseURL}/user/register`
-            // axios.post(registerURL, reqBody)
-            // .then(res => {console.log(res)})
-            // .catch(error => {
-            //     if (error) {
-            //         console.log(error, error.message);
-            //     }
-            // })
+            console.log(reqBody);
+            const registerURL = `${baseURL}/user/register`
+            axios.post(registerURL, reqBody)
+            .then(res => {console.log(res)})
+            .catch(error => {
+                if (error) {
+                    console.log(error, error.message);
+                }
+            })
         }
     }
 }
