@@ -1,13 +1,22 @@
 import React, {useState} from 'react'
 import Form from './Form'
 import axios from 'axios';
-import {setUserSession} from '../utils/Common';
+import {setLocalSession} from '../utils/Common';
 
 import {loginReq} from '../utils/userRequests';
 import {loginInputs} from '../utils/userInputs';
 
 export default function Login(props) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const regLink = '/register';
+
+    const handleLogin = () => {
+        setError(null);
+        setLoading(true);
+        loginReq();
+        
+    }
     return (
         <div>
             <br></br>
@@ -15,7 +24,7 @@ export default function Login(props) {
             id="loginForm"
             inputs={loginInputs}
             title="Login to Your Account!"
-            submitFunc={loginReq}
+            submitFunc={handleLogin}
             ></Form>
             {props.loggedIn ? (
                 <div>
