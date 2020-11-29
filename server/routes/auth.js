@@ -59,3 +59,5 @@ handleProfilePost = async(body, authToken) => {
         res.json(400).json(error);
     }
 }
+
+module.exports = router;
