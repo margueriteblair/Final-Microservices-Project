@@ -14,6 +14,7 @@ const routes = require("./routes")
 const userRouter = require("./routes/userRouter");
 const PORT = process.env.PORT;
 const URI = process.env.MONGO;
+const cors = require("cors");
 
 if (typeof(URI) === "string") {
     mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
@@ -25,6 +26,7 @@ if (typeof(URI) === "string") {
 }
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/", routes)
 app.use("/user", userRouter);

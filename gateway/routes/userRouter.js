@@ -24,7 +24,7 @@ router.post("/register", validateUser, passwordEncryption, async (req, res) => {
         await User.create(req.body);
         res.status(201).json({message: "success in creating new user!"});
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({message: error.message, error: error});
     }
 })
 

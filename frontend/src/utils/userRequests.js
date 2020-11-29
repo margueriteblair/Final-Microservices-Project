@@ -1,4 +1,4 @@
-const {default: axios} = require('axios')
+const {default: axios} =  require('axios')
 const baseURL = 'http://localhost:3399'
 const validator = require('validator')
 
@@ -13,7 +13,6 @@ module.exports = {
                 fieldErrors[input.name] = "\nInvalid password length, password must be between 7 and 1000 characters\n"
             }
         }
-
         if (Object.keys(fieldErrors).length !== 0) {
             let errorStr = "";
             for (const field in fieldErrors) {
@@ -29,7 +28,6 @@ module.exports = {
         }
 
         const loginUrl = baseURL + '/user/login'
-
         axios.put(loginUrl, reqBody)
         .then(res => {
             console.log(res)
@@ -74,6 +72,7 @@ module.exports = {
             console.log(errorStr)
             alert(errorStr)
         } else if (Object.keys(fieldErrors).length === 0) {
+            console.log('hi')
             for (const input of form) {
                 if (input.name !== "password2") {
                     reqBody[input.name] = input.value
@@ -86,7 +85,7 @@ module.exports = {
             .then(res => {console.log(res)})
             .catch(error => {
                 if (error) {
-                    console.log(error)
+                    console.log(error, error.message);
                 }
             })
         }
