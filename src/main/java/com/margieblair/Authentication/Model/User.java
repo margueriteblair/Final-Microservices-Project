@@ -1,39 +1,38 @@
 package com.margieblair.Authentication.Model;
 
+import com.sun.istack.NotNull;
 import org.bson.Document;
-import org.bson.codecs.pojo.annotations.BsonId;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import org.bson.codecs.pojo.annotations.BsonIgnore;
-import org.bson.codecs.pojo.annotations.BsonProperty;
-import org.bson.types.ObjectId;
 
-import javax.persistence.Entity;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User {
+public class User implements UserDetails {
     public static final int MIN_USERNAME_LENGTH = 3;
     public static final int MAX_USERNAME_LENGTH = 50;
     public static final int MIN_PASSWORD_LENGTH = 7;
     public static final int MIN_EMAIL_LENGTH = 6;
     public static final int MAX_EMAIL_LENGTH = 50;
 
-    @BsonId
-    public ObjectId id;
-    @BsonProperty(value = "username")
-    public String username;
-    @BsonProperty(value = "email")
-    public String email;
-    @BsonProperty(value = "password")
-    public String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @NotNull
+    private String firstName;
+    @NotNull
+    private String lastName;
+    @Email(message = "Please provide a valid email.")
+    @NotBlank(message = "Email is required")
+    @Column(unique = true)
+    private String username;
 
     public User() {}
 
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
 
     @BsonIgnore
     public Document getDocument(boolean includeId) {
