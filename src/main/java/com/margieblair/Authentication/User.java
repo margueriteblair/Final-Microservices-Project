@@ -4,6 +4,9 @@ import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     public static final int MIN_USERNAME_LENGTH = 3;
     public static final int MAX_USERNAME_LENGTH = 50;
@@ -13,8 +16,8 @@ public class User {
 
     @BsonId
     public ObjectId id;
-    @BsonProperty(value = "name")
-    public String name;
+    @BsonProperty(value = "username")
+    public String username;
     @BsonProperty(value = "email")
     public String email;
     @BsonProperty(value = "password")
@@ -22,10 +25,35 @@ public class User {
 
     public User() {}
 
-    public User(String name, String email, String password) {
-        this.name = name;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public List<String> userVerification() {
+        List<String> errorsList = new ArrayList<>();
+        if (username == null) {
+            errorsList.add("You must have a username");
+        } else if (username.length() < MIN_USERNAME_LENGTH) {
+            errorsList.add("Username is too short.");
+        } else if (username.length() > MAX_USERNAME_LENGTH) {
+            errorsList.add("Username is too long");
+        }
+        if (password == null) {
+            errorsList.add("You must have a password");
+        } else if (password.length() < MIN_PASSWORD_LENGTH) {
+            errorsList.add("Password must be greater than 7 characters.");
+        }
+        if (email == null) {
+            errorsList.add("You must have an email");
+        } else if (email.length() < MIN_EMAIL_LENGTH) {
+            errorsList.add("Email must be greater than 6 characters.");
+        } else if (email.length() > MAX_EMAIL_LENGTH) {
+            errorsList.add("Email cannot be greater than 50 characters");
+        }
+
+        return errorsList;
     }
 
 
