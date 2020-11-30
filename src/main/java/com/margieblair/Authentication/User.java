@@ -1,6 +1,8 @@
 package com.margieblair.Authentication;
 
+import org.bson.Document;
 import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
@@ -29,6 +31,21 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    @BsonIgnore
+    public Document getDocument(boolean includeId) {
+        Document doc = new Document();
+
+        if (username != null)
+            doc.append("username", username);
+        if (email != null)
+            doc.append("email", email);
+        if (password != null)
+            doc.append("password", password);
+
+        if (includeId) doc.append("id", id);
+        return doc;
     }
 
     public List<String> userVerification() {
