@@ -9,6 +9,7 @@ import org.bson.codecs.pojo.annotations.BsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,25 +30,26 @@ public class User implements UserDetails {
     @Email(message = "Please provide a valid email.")
     @NotBlank(message = "Email is required")
     @Column(unique = true)
+    private String email;
+
+    @NotBlank(message = "A unique username is required")
+    @Column(unique = true)
     private String username;
+
+    @NotBlank(message = "A password is required")
+    private String password;
+
+    @Transient
+    private String confirmPassword;
+
+    private Date createdOn;
+    private Date updatedOn;
 
     public User() {}
 
 
-    @BsonIgnore
-    public Document getDocument(boolean includeId) {
-        Document doc = new Document();
 
-        if (username != null)
-            doc.append("username", username);
-        if (email != null)
-            doc.append("email", email);
-        if (password != null)
-            doc.append("password", password);
 
-        if (includeId) doc.append("id", id);
-        return doc;
-    }
 
     public List<String> userVerification() {
         List<String> errorsList = new ArrayList<>();
