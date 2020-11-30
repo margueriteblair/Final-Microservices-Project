@@ -47,7 +47,23 @@ public class User implements UserDetails {
 
     public User() {}
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getUsername() {
+        return username;
+    }
 
 
 
