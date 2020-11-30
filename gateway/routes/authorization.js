@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router();
-// const config = require("../config/default");
+const baseURL = process.env.AUTH_SERVER_BASE
 const {default: axios} = require("axios");
 
 router.post("/", async (req, res) => {
