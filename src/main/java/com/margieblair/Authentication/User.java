@@ -1,8 +1,6 @@
 package com.margieblair.Authentication;
 
-import org.bson.Document;
 import org.bson.codecs.pojo.annotations.BsonId;
-import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
