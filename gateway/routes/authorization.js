@@ -1,23 +1,17 @@
 const express = require("express")
 const router = express.Router();
 // const config = require("../config/default");
-const axios = require("axios");
+const {default: axios} = require("axios");
 
 router.post("/", async (req, res) => {
     let response;
     try {
         switch(req.body.action) {
-            case "postUser":
+            case "createUser":
                 response = await handleUserPost(req.body.reqBody);
                 break;
             case "loginUser":
                 response = await handleUserLogin(req.body.reqBody);
-                break;
-            case "handleProfilePost":
-                response = await handleProfilePost(
-                    req.body.reqBody,
-                    req.header("x-auth-token")
-                );
                 break;
             default:
                 return res.status(404).json({errors: {action: "invalid action"}});
@@ -49,15 +43,5 @@ handleUserLogin = async (body) => {
     }
 };
 
-handleProfilePost = async(body, authToken) => {
-    try {
-        res = await axios.post(`${config.authServer}/api/profiles`, body, {
-            headers: {"x-auth-token": authToken}
-        })
-        return res;
-    } catch (error) {
-        res.json(400).json(error);
-    }
-}
 
 module.exports = router;
