@@ -1,7 +1,5 @@
 import React from 'react'
 import useUserData from '../Hooks/useUserData';
-import userLogout from '../utils/userLogout';
-
 
 export default function Home(props) {
     const [loggedIn, userName] = useUserData(); 
