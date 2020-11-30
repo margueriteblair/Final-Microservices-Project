@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
 
 handleUserPost = async (body) => {
     try {
-        const res = await axios.post(`${config.authServer}/api/users`, body);
+        const res = await axios.post(`${baseURL}/api/users`, body);
         console.log(res.data);
         return res;
     } catch (error) {
@@ -36,7 +36,7 @@ handleUserPost = async (body) => {
 
 handleUserLogin = async (body) => {
     try {
-        const res = await axios.post(`${config.authServer}/api/users/login`, body);
+        const res = await axios.post(`${baseURL}/api/users/login`, body);
         return res;
     } catch (error) {
         res.status(400).json(error);
