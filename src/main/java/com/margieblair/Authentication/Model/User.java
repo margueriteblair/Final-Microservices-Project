@@ -1,4 +1,4 @@
-package com.margieblair.Authentication;
+package com.margieblair.Authentication.Model;
 
 import org.bson.Document;
 import org.bson.codecs.pojo.annotations.BsonId;
@@ -6,9 +6,11 @@ import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class User {
     public static final int MIN_USERNAME_LENGTH = 3;
     public static final int MAX_USERNAME_LENGTH = 50;

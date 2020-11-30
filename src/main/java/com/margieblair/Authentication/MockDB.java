@@ -1,5 +1,7 @@
 package com.margieblair.Authentication;
 
+import com.margieblair.Authentication.Model.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
