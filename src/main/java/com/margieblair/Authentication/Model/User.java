@@ -1,16 +1,12 @@
 package com.margieblair.Authentication.Model;
 
 import com.sun.istack.NotNull;
-import org.bson.Document;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import org.bson.codecs.pojo.annotations.BsonIgnore;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class User implements UserDetails {
@@ -65,32 +61,20 @@ public class User implements UserDetails {
         return username;
     }
 
-
-
-    public List<String> userVerification() {
-        List<String> errorsList = new ArrayList<>();
-        if (username == null) {
-            errorsList.add("You must have a username");
-        } else if (username.length() < MIN_USERNAME_LENGTH) {
-            errorsList.add("Username is too short.");
-        } else if (username.length() > MAX_USERNAME_LENGTH) {
-            errorsList.add("Username is too long");
-        }
-        if (password == null) {
-            errorsList.add("You must have a password");
-        } else if (password.length() < MIN_PASSWORD_LENGTH) {
-            errorsList.add("Password must be greater than 7 characters.");
-        }
-        if (email == null) {
-            errorsList.add("You must have an email");
-        } else if (email.length() < MIN_EMAIL_LENGTH) {
-            errorsList.add("Email must be greater than 6 characters.");
-        } else if (email.length() > MAX_EMAIL_LENGTH) {
-            errorsList.add("Email cannot be greater than 50 characters");
-        }
-
-        return errorsList;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
+
+    @PreUpdate
+    public void updateDate() {
+        this.updatedOn = new Date();
+    }
+
+    @PrePersist
+    public void createDate() {
+        this.createdOn = new Date();
+    }
+
 
 
 
