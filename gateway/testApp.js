@@ -40,3 +40,26 @@ app.post("/", async (req, res) => {
 })
 
 const newsBaseURL = "http://newsapi.org/v2/"
+
+const searchNewsArticles = async (query) => {
+    const date = "2020-11-29";
+    const url = newsBaseURL + `everything?q=${query}&from=${date}&sortBy=popularity&apiKey=${key}`;
+
+    try {
+        const articles = await (fetch(url));
+        return await articles.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+const getTopHeadlines = async () => {
+    const url = newsBaseURL + `top-headlines?country=us&apiKey=${key}`
+    try {
+        const articles = await fetch(url);
+        return await articles.json();
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+}
