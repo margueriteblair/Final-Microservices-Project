@@ -26,5 +26,17 @@ app.post("/", async (req, res) => {
             } catch (error) {
                 res.status(500).json({message: error.message});
             }
+            break;
+        case "topHeadLines":
+            try {
+                res.send(await getTopHeadLines());
+            } catch (error) {
+                res.status(500).json({message: error.message})''
+            }
+            break;
+        default: res.send({message: "invalid action type"}).status(400);
+        break;
     }
 })
+
+const newsBaseURL = "http://newsapi.org/v2/"
