@@ -1,20 +1,17 @@
 package com.margieblair.Authentication.Model;
 
 import com.sun.istack.NotNull;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
 public class User implements UserDetails {
-    public static final int MIN_USERNAME_LENGTH = 3;
-    public static final int MAX_USERNAME_LENGTH = 50;
-    public static final int MIN_PASSWORD_LENGTH = 7;
-    public static final int MIN_EMAIL_LENGTH = 6;
-    public static final int MAX_EMAIL_LENGTH = 50;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,12 +58,37 @@ public class User implements UserDetails {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public String getConfirmPassword() {
         return confirmPassword;
     }
 
     public void setPassword(String newPassword) {
         password = newPassword;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {
