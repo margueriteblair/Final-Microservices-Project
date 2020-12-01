@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express();
+require("dotenv").config();
 const fetch = require("node-fetch")
 
 const key = process.env.NEWS_KEY;
@@ -63,3 +64,15 @@ const getTopHeadlines = async () => {
         throw error;
     }
 }
+
+//example post request:
+// const postRequest = {
+//     headers: {
+//       "x-auth-token":
+//         "x-auth-token can be included here and forwarded or we can include it in the body.",
+//     },
+//     body: {
+//       action: "action for the service which the gateway will convert to url.",
+//       reqBody: "the body for the service",
+//     },
+//   };
