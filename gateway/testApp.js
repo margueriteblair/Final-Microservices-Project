@@ -29,9 +29,9 @@ app.post("/", async (req, res) => {
             break;
         case "topHeadLines":
             try {
-                res.send(await getTopHeadLines());
+                res.send(await getTopHeadlines());
             } catch (error) {
-                res.status(500).json({message: error.message})''
+                res.status(500).json({message: error.message})
             }
             break;
         default: res.send({message: "invalid action type"}).status(400);

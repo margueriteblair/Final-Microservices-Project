@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon gateway.js"
+    "dev": "nodemon gateway.js",
+    "test": "nodemon testApp.js"
   },
   "keywords": [],
   "author": "Marguerite Blair",
