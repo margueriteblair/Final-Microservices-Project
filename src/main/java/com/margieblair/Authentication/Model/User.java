@@ -65,6 +65,14 @@ public class User implements UserDetails {
         return confirmPassword;
     }
 
+    public void setPassword(String newPassword) {
+        password = newPassword;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     @PreUpdate
     public void updateDate() {
         this.updatedOn = new Date();
