@@ -73,6 +73,10 @@ public class User implements UserDetails {
         return password;
     }
 
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     @PreUpdate
     public void updateDate() {
         this.updatedOn = new Date();

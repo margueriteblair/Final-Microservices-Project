@@ -16,6 +16,8 @@ public class UserService {
     public User saveUser(User newUser) {
         try {
             newUser.setPassword(bcrypt.encode(newUser.getPassword()));
+            newUser.setConfirmPassword("");
+            return userRepository.save(newUser);
         } catch (Exception ex) {
             throw new IllegalArgumentException("That username already exists.");
         }
