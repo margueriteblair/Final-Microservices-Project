@@ -12,11 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,5 +65,15 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = TOKEN_PREFIX + jwtTokenCreator.createJWT(authentication);
         return ResponseEntity.ok(new SuccessfulLoginWithJWT(true, jwt));
+    }
+
+    @GetMapping
+    public ResponseEntity<Boolean> validateToken(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        String jwt = getJWT(servletRequest);
+        return ResponseEntity.ok(StringUtils.hasText(jwt) && tokenProvier.validateToken(jwt));
+    }
+
+    private String getJWTFromRequest (HttpServletRequest servletRequest) {
+        String
     }
 }
