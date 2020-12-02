@@ -18,8 +18,8 @@ router.post("/", async (req, res) => {
             default:
                 return res.status(404).json({errors: {action: "Invalid action"}});
         }
-        if (response.errors) throw response.errors;
-        res.json(response.data);
+        if (res.errors) throw res.errors;
+        res.json(res.data);
     } catch (error) {
         console.error(error);
         res.status(500).json(error);
@@ -28,20 +28,20 @@ router.post("/", async (req, res) => {
 
 handleUserPost = async (body) => {
     try {
-        const res = await axios.post(`${baseURL}/api/users`, body);
-        console.log(res.data);
-        return res;
+        await axios.post(`${baseURL}/api/users`, body);
+        // console.log(res.data);
+        return "success";
     } catch (error) {
-        res.status(400).json(error);
+        throw error;
     }
 };
 
 handleUserLogin = async (body) => {
     try {
-        const res = await axios.post(`${baseURL}/api/users/login`, body);
-        return res;
+        await axios.post(`${baseURL}/api/users/login`, body);
+        return "success";
     } catch (error) {
-        res.status(400).json(error);
+        throw error;
     }
 };
 
