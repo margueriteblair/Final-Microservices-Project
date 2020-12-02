@@ -1,19 +1,29 @@
 package com.margieblair.Authentication.Security;
 
 import com.margieblair.Authentication.Model.User;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.*;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
 public class JWToken {
-    private static final int EXPIRATION_TIME_LIMIT = 500_000;
-    private static final String JWT_SECRET = "dkldck4kl2laxf467sdx";
-//    public static final String SIGN_UP_URLS = "/api/users/**";
+    private static final int EXPIRATION_TIME_LIMIT = 5 * 60 * 60;
+
+    @Autowired
+    private Environment env;
+
+//    @Value("${jwt.secret}")
+//    private String =
+
+
+    //    public static final String SIGN_UP_URLS = "/api/users/**";
 //    public static final String TOKEN_PREFIX = "Bearer ";
 //    public static final String HEADER_STRING = "Authorization";
     public String generateToken(Authentication authentication) {
