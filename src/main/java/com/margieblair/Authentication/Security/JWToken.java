@@ -37,6 +37,11 @@ public class JWToken {
         return jsonWebToken;
     }
 
+    public Integer getIdFromJWT(String jwt) {
+        Claims claims = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(jwt).getBody();
+        return Integer.parseInt((String) claims.get("id"));
+    }
+
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
@@ -46,4 +51,6 @@ public class JWToken {
         }
         return false;
     }
+
+
 }
