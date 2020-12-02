@@ -11,10 +11,11 @@ import javax.transaction.Transactional;
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
-    @Override public UserDetails loadUserByUsername(String email) throws Exception {
+    @Override public UserDetails loadUserByUsername(String email) {
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
-            throw new Exception("User not found");
+            //MARGIE COME BACK TO THIS TO MAKE SIGNALING FOR THE END USER
+            System.out.println("User not found.");
         }
         return user;
     }

@@ -53,7 +53,7 @@ public class UserController {
         return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("/login")
+    @PutMapping("/login")
     public ResponseEntity<?> authenticateLogin(@Valid @RequestBody Login loginRequest, BindingResult result) {
         ResponseEntity<?> errorMap = errorService.ErrorReturningService(result);
         if (errorMap != null) {
