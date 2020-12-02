@@ -8,6 +8,7 @@ import com.margieblair.Authentication.Services.ErrorReturningService;
 import com.margieblair.Authentication.Services.UserService;
 import com.margieblair.Authentication.Services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +37,9 @@ public class UserController {
     private JWToken jwtTokenCreator;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private Environment env;
+
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result) {
@@ -62,7 +66,7 @@ public class UserController {
                         loginRequest.getPassword()
                 )
         );
-
+        String TOKEN_PREFIX = env.getProperty("jwt.prefix");
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = TOKEN_PREFIX + jwtTokenCreator.createJWT(authentication);
         return ResponseEntity.ok(new SuccessfulLoginWithJWT(true, jwt));
@@ -70,11 +74,13 @@ public class UserController {
 
     @GetMapping("/validateToken")
     public ResponseEntity<Boolean> validateToken(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-        String jwt = getJWT(servletRequest);
-        return ResponseEntity.ok(StringUtils.hasText(jwt) && tokenProvier.validateToken(jwt));
+        String jwt = getJWTFromRequest(servletRequest);
+        return ResponseEntity.ok(StringUtils.hasText(jwt) && jwtTokenCreator.validateToken(jwt));
     }
 
     private String getJWTFromRequest (HttpServletRequest servletRequest) {
+        String HEADER_STRING = env.getProperty("jwt.header");
+        String TOKEN_PREFIX = env.getProperty("jwt.prefix");
         String bearerToken = servletRequest.getHeader(HEADER_STRING);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(TOKEN_PREFIX)) {
             return bearerToken.substring((7));

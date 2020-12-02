@@ -21,7 +21,7 @@ public class JWToken {
     //    public static final String SIGN_UP_URLS = "/api/users/**";
 //    public static final String TOKEN_PREFIX = "Bearer ";
 //    public static final String HEADER_STRING = "Authorization";
-    public String generateToken(Authentication authentication) {
+    public String createJWT(Authentication authentication) {
         String JWT_SECRET = env.getProperty("jwt.secret");
         User user = (User) authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());
