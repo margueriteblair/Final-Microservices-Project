@@ -2,13 +2,18 @@ package com.margieblair;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class AuthenticationMicroservicesApplication {
 
+	@Bean
+	BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	public static void main(String[] args) {
-//		AuthenticationApplication.main(args);
-//		ProcessorApplication.main(args);
 		SpringApplication.run(AuthenticationMicroservicesApplication.class, args);
 	}
 
