@@ -36,4 +36,14 @@ public class JWToken {
                 .compact();
         return jsonWebToken;
     }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
+            return true;
+        } catch (UnsupportedJwtException | SignatureException | ExpiredJwtException | IllegalArgumentException | MalformedJwtException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }
