@@ -9,4 +9,12 @@ public class Login {
 
     @NotBlank(message = "Please provide a valid password")
     private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }
