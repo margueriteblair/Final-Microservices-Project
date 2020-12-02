@@ -78,5 +78,6 @@ public class UserController {
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(TOKEN_PREFIX)) {
             return bearerToken.substring((7));
         }
+        return null;
     }
 }
