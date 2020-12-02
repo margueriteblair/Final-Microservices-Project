@@ -67,13 +67,16 @@ public class UserController {
         return ResponseEntity.ok(new SuccessfulLoginWithJWT(true, jwt));
     }
 
-    @GetMapping
+    @GetMapping("/validateToken")
     public ResponseEntity<Boolean> validateToken(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         String jwt = getJWT(servletRequest);
         return ResponseEntity.ok(StringUtils.hasText(jwt) && tokenProvier.validateToken(jwt));
     }
 
     private String getJWTFromRequest (HttpServletRequest servletRequest) {
-        String
+        String bearerToken = servletRequest.getHeader(HEADER_STRING);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(TOKEN_PREFIX)) {
+            return bearerToken.substring((7));
+        }
     }
 }
