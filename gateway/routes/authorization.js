@@ -4,17 +4,17 @@ const baseURL = process.env.AUTH_SERVER_BASE
 const {default: axios} = require("axios");
 
 router.post("/", async (req, res) => {
-    let response;
+    const {action, data} = req.body;
     try {
-        switch(req.body.action) {
+        switch(action) {
             case "createUser":
-                response = await handleUserPost(req.body.reqBody);
+                res.send(handleUserPost(data));
                 break;
             case "loginUser":
-                response = await handleUserLogin(req.body.reqBody);
+                res.send(handleUserLogin(data));
                 break;
             default:
-                return res.status(404).json({errors: {action: "invalid action"}});
+                return res.status(404).json({errors: {action: "Invalid action"}});
         }
         if (response.errors) throw response.errors;
         res.json(response.data);
