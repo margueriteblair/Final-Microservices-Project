@@ -13,6 +13,8 @@ router.post("/", async (req, res) => {
             case "loginUser":
                 res.send(handleUserLogin(data));
                 break;
+            case "logout":
+                res.send(handleUserLogout(data));
             default:
                 return res.status(404).json({errors: {action: "Invalid action"}});
         }
@@ -42,6 +44,14 @@ handleUserLogin = async (body) => {
         res.status(400).json(error);
     }
 };
+
+handleUserLogout = async (body) => {
+    try {
+
+    } catch (error) {
+        res.status(400).json(error);
+    }
+}
 
 
 module.exports = router;
