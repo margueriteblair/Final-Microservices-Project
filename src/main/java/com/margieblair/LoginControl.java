@@ -25,9 +25,9 @@ public class LoginControl {
     }
 
     @PostMapping
-    public User createUser(@RequestBody String name, String password, int id){
-        User user = new User(name, password, id);
-        System.out.println("new user: " + name + " " + password + " "+ id);
+    public User registerUser(@RequestBody String username, String email, String password, int id){
+        User user = new User(username, email, password, id);
+        System.out.println("new user: " + username + " " + password + " "+ id);
 
         return user;
     }
