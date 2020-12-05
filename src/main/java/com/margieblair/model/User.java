@@ -13,16 +13,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     private String firstName;
     private String lastName;
+    private String password;
     @Id
     private long id;
     private String email;
 
     public User() {}
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     @Override
@@ -30,6 +32,10 @@ public class User {
         return String.format(
                 "Customer[id=%s, firstName='%s', lastName='%s']",
                 id, firstName, lastName, email);
+    }
+
+    public String getEmail() {
+        return email;
     }
     }
 
