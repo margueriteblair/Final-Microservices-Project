@@ -1,5 +1,6 @@
 package com.margieblair;
 
+import com.margieblair.model.User;
 import com.margieblair.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,4 +15,17 @@ public class MyRunner implements CommandLineRunner {
 
     @Autowired
     private UserRepository repository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        repository.deleteAll();
+
+        repository.save(new User("Margie", "Blair", "margieblair@gmail.com", "password"));
+        repository.save(new User("Hello", "World", "careerdevs@gmail.com", "password"));
+
+        repository.findAll().forEach((user) -> {
+            logger.info("{}", user);
+        });
+
+    }
 }
