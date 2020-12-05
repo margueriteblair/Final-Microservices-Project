@@ -2,25 +2,34 @@ package com.margieblair.service;
 
 import com.margieblair.model.User;
 import com.margieblair.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.margieblair.utils.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    UserRepository database;
+    private final UserRepository userRepository;
 
-    public User registerUser(User user) {
-        if (database.findByEmail(user.getEmail()) != null) {
-            throw new IllegalArgumentException("Email must be unique");
+    public UserService() {
+        userRepository = null;
+    }
+
+    public User getUserById(String id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return user.get();
         }
-        return database.save(user);
+        throw new EntityNotFoundException("Cannot find any user with the given id");
     }
 
-    public List<User> findAll() {
-        return database.findAll();
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
+
+    
 }
