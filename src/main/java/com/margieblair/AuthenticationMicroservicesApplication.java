@@ -25,6 +25,7 @@ public class AuthenticationMicroservicesApplication implements CommandLineRunner
 		for (User user : database.findAll()) {
 			System.out.println(user);
 		}
+		//on run the db will fill
 	}
 
 	}
