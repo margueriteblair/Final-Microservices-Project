@@ -11,11 +11,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="")
 public class User {
+    @Id
+    private long id;
     private String firstName;
     private String lastName;
     private String password;
-    @Id
-    private long id;
     private String email;
 
     public User() {}
@@ -27,12 +27,6 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Customer[id=%s, firstName='%s', lastName='%s']",
-                id, firstName, lastName, email);
-    }
 
     public String getEmail() {
         return email;
