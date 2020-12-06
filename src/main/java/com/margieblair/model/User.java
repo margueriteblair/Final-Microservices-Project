@@ -18,7 +18,7 @@ public class User {
 
 
     @Id
-    private UUID id;
+    private String id;
     private String firstName;
     private String lastName;
     private String password;
@@ -27,8 +27,7 @@ public class User {
     public User() {
     }
 
-    public User(UUID id, String firstName, String lastName, String email, String password) {
-        this.id = UUID.randomUUID();
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -40,11 +39,11 @@ public class User {
         return email;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
