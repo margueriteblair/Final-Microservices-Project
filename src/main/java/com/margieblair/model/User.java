@@ -1,6 +1,7 @@
 package com.margieblair.model;
 
 
+import com.margieblair.service.SequenceGeneratorService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="microservices-users")
 public class User {
+
+    private SequenceGeneratorService sequenceGenerator;
 
     @Transient
     public static final String SEQUENCE_NAME = "users_sequence";
@@ -25,7 +28,8 @@ public class User {
 
     public User() {}
 
-    public User(String firstName, String lastName, String email, String password) {
+    public User(long id, String firstName, String lastName, String email, String password) {
+        this.id = sequenceGenerator.generateSequence(User.SEQUENCE_NAME);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
