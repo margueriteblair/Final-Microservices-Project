@@ -4,8 +4,9 @@ package com.margieblair.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,11 +14,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="microservices-users")
 public class User {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "users_sequence";
+    private UUID uuid;
+
 
     @Id
-    private long id;
+    private UUID id;
     private String firstName;
     private String lastName;
     private String password;
@@ -26,8 +27,8 @@ public class User {
     public User() {
     }
 
-    public User(long id, String firstName, String lastName, String email, String password) {
-        this.id = id+1;
+    public User(UUID id, String firstName, String lastName, String email, String password) {
+        this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -39,11 +40,11 @@ public class User {
         return email;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 }
