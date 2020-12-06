@@ -28,13 +28,13 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @PutMapping("user")
+    @PutMapping("/user")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         User newUser = userService.updateUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/user")
     public ResponseEntity<String> deleteStudent(@RequestParam(name="id") String id) {
         String message = userService.getUserToDelete(id);
         return new ResponseEntity<>(message, HttpStatus.OK);
