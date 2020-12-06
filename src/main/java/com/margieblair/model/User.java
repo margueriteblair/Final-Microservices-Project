@@ -1,6 +1,7 @@
 package com.margieblair.model;
 
 
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -9,9 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 
-@Document(collection="")
+@Document(collection="microservices-users")
 public class User {
+
     @Id
+    @Generated
     private long id;
     private String firstName;
     private String lastName;
