@@ -1,10 +1,10 @@
 package com.margieblair.model;
 
 
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -13,8 +13,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="microservices-users")
 public class User {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
+
     @Id
-    @Generated
     private long id;
     private String firstName;
     private String lastName;
