@@ -10,6 +10,8 @@ const auth = require("./routes/authorization")
 app.get("/", (req, res) => {
     res.send("Okay, official API gateway")
 })
+// gateway >> auth service
+// frontend >> gateway >> authservice
 
 app.use(express.json());
 app.use(cors());
