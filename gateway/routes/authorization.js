@@ -15,6 +15,13 @@ router.post("/", async (req, res) => {
                 break;
             case "logout":
                 res.send(handleUserLogout(data));
+                break;  
+            case "registerProfile":
+                res.send(registerProfile(req));
+                break;
+            case "getSelf":
+                res.send(getSelf(req));
+                break;
             default:
                 return res.status(404).json({errors: {action: "Invalid action"}});
         }
@@ -67,7 +74,27 @@ const registerProfile = async (req) => {
                 return res;
         } catch (error) {
             console.error(error.message);
+            return error.message;
         }
+    }
+}
+
+const getSelf = async (req) => {
+    const token = req.header('x-auth-token');
+  
+    if (token) {
+      try {
+        const response = await axios.get(`${authServer}/api/profiles`, {
+          headers: { 'x-auth-token': token },
+        });
+  
+        return response;
+      } catch (error) {
+        console.error(error.response.data);
+        return error.response.data;
+      }
+    } else {
+      return { errors: { msg: 'No token, authorization denied' } };
     }
 }
 
