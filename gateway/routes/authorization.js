@@ -13,7 +13,6 @@ router.post("/", async (req, res) => {
                 } catch (error) {
                     res.status(500).json({message: error.message});
                 }
-                // res.send(await handleUserPost(data));
                 break;
             case "loginUser":
                 res.send(await handleUserLogin(data));
@@ -38,11 +37,10 @@ router.post("/", async (req, res) => {
     }
 });
 
-handleUserPost = async () => {
+handleUserPost = async (data) => {
     try {
-        // await axios.post(`${baseURL}/api/user`, data);
-        // console.log(res.data);
-        return "success";
+        await axios.post(`${baseURL}/user`, data);
+        return "Success! New user created";
     } catch (error) {
         throw error;
     }
