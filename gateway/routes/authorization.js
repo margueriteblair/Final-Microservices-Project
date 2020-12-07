@@ -8,10 +8,15 @@ router.post("/", async (req, res) => {
     try {
         switch(action) {
             case "createUser":
-                res.send(handleUserPost(data));
+                try {
+                    res.send(await handleUserPost(data));
+                } catch (error) {
+                    res.status(500).json({message: error.message});
+                }
+                // res.send(await handleUserPost(data));
                 break;
             case "loginUser":
-                res.send(handleUserLogin(data));
+                res.send(await handleUserLogin(data));
                 break;
             case "logout":
                 res.send(handleUserLogout(data));
@@ -33,9 +38,9 @@ router.post("/", async (req, res) => {
     }
 });
 
-handleUserPost = async (body) => {
+handleUserPost = async () => {
     try {
-        await axios.post(`${baseURL}/user`, body);
+        // await axios.post(`${baseURL}/api/user`, data);
         // console.log(res.data);
         return "success";
     } catch (error) {
