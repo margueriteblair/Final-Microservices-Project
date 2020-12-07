@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
 
 handleUserPost = async (body) => {
     try {
-        await axios.post(`${baseURL}/api/users`, body);
+        await axios.post(`${baseURL}/user`, body);
         // console.log(res.data);
         return "success";
     } catch (error) {
@@ -45,7 +45,7 @@ handleUserPost = async (body) => {
 
 handleUserLogin = async (body) => {
     try {
-        await axios.post(`${baseURL}/api/users/login`, body);
+        await axios.post(`${baseURL}/users/login`, body);
         return "success";
     } catch (error) {
         throw error;
