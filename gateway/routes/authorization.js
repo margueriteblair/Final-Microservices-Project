@@ -47,9 +47,27 @@ handleUserLogin = async (body) => {
 
 handleUserLogout = async (body) => {
     try {
-
     } catch (error) {
         res.status(400).json(error);
+    }
+}
+
+const registerProfile = async (req) => {
+    const token = req.header('x-auth-token');
+
+    if (token) {
+        try {
+            const res = await axios.post(
+                `${baseURL}/api/profiles`,
+                req.body.profileData,
+                {
+                    headers: {'x-auth-token': token}
+                }
+                )
+                return res;
+        } catch (error) {
+            console.error(error.message);
+        }
     }
 }
 
