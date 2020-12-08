@@ -8,7 +8,7 @@ const auth = require("./routes/authorization")
 
 
 app.get("/", (req, res) => {
-    res.send("Okay, official API gateway")
+    res.send("que lo queeee estamos en la applicacion!!")
 })
 
 app.use(express.json());
