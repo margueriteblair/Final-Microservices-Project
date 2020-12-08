@@ -90,6 +90,16 @@ const getAll = async () => {
     }
 }
 
+const deleteUser = async (data) => {
+    try {
+        //id=5fcf2c9dac18891c385e852c
+        let response = await axios.delete(`${baseURL}/user?id=${data.id}`);
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 
 // const getAll = async (data) => {
 //     const token = req.header('x-auth-token');
