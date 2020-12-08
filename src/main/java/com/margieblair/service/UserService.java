@@ -34,7 +34,7 @@ public class UserService {
 
     public String getUserToDelete(String id) {
         userRepository.deleteById(id);
-        return "Student with id: " + id + "deleted";
+        return "User with id: " + id + " deleted";
     }
 
     public List<User> getUsers() {
