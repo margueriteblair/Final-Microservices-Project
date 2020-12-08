@@ -8,7 +8,7 @@ const auth = require("./routes/authorization")
 
 
 app.get("/", (req, res) => {
-    res.send("que lo queeee estamos en la applicacion!!")
+    res.send("que lo queeee estamos en la aplicacion!!")
 })
 
 app.use(express.json());

@@ -37,7 +37,7 @@ handleUserPost = async (data) => {
     try {
         let response = await axios.post(`${baseURL}/user`, data);
         console.log(response);
-        return response;
+        return "Successfully created new user!";
     } catch (error) {
         throw error;
     }
@@ -83,7 +83,7 @@ const getAll = async () => {
     try {
         let response = await axios.get(`${baseURL}/users`);
         console.log(response);
-        return response;
+        return "fetched all data, check console for output"
     } catch (error) {
         return error.message;
     }
