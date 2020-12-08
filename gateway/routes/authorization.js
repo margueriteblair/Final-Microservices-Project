@@ -8,23 +8,19 @@ router.post("/", async (req, res) => {
     try {
         switch(action) {
             case "createUser":
-                try {
-                    res.send(await handleUserPost(data));
-                } catch (error) {
-                    res.status(500).json({message: error.message});
-                }
+                res.json(await handleUserPost(data));
                 break;
             case "loginUser":
                 res.send(await handleUserLogin(data));
                 break;
             case "logout":
-                res.send(handleUserLogout(data));
+                res.send(await handleUserLogout(data));
                 break;  
             case "registerProfile":
-                res.send(registerProfile(req));
+                res.send(await registerProfile(req));
                 break;
             case "getAllUsers":
-                res.send(getAll(req));
+                res.json(await getAll(req));
                 break;
             default:
                 return res.status(404).json({errors: {action: "Invalid action"}});
@@ -41,7 +37,7 @@ handleUserPost = async (data) => {
     try {
         let response = await axios.post(`${baseURL}/user`, data);
         console.log(response);
-        return "Success! New user created";
+        return response;
     } catch (error) {
         throw error;
     }
@@ -85,7 +81,9 @@ const registerProfile = async (req) => {
 
 const getAll = async () => {
     try {
-        return await axios.get(`${baseURL}/users`);
+        let response = await axios.get(`${baseURL}/users`);
+        console.log(response);
+        return response;
     } catch (error) {
         return error.message;
     }
