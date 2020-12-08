@@ -23,8 +23,8 @@ router.post("/", async (req, res) => {
             case "registerProfile":
                 res.send(registerProfile(req));
                 break;
-            case "getSelf":
-                res.send(getSelf(req));
+            case "getAllUsers":
+                res.send(getAll(req));
                 break;
             default:
                 return res.status(404).json({errors: {action: "Invalid action"}});
@@ -39,7 +39,8 @@ router.post("/", async (req, res) => {
 
 handleUserPost = async (data) => {
     try {
-        await axios.post(`${baseURL}/user`, data);
+        let response = await axios.post(`${baseURL}/user`, data);
+        console.log(response);
         return "Success! New user created";
     } catch (error) {
         throw error;
@@ -48,8 +49,8 @@ handleUserPost = async (data) => {
 
 handleUserLogin = async (body) => {
     try {
-        await axios.post(`${baseURL}/users/login`, body);
-        return "success";
+        await axios.put(`${baseURL}/user`, body);
+        return "Success! User logged in!";
     } catch (error) {
         throw error;
     }
@@ -82,24 +83,33 @@ const registerProfile = async (req) => {
     }
 }
 
-const getSelf = async (req) => {
-    const token = req.header('x-auth-token');
-  
-    if (token) {
-      try {
-        const response = await axios.get(`${authServer}/api/profiles`, {
-          headers: { 'x-auth-token': token },
-        });
-  
-        return response;
-      } catch (error) {
-        console.error(error.response.data);
-        return error.response.data;
-      }
-    } else {
-      return { errors: { msg: 'No token, authorization denied' } };
+const getAll = async () => {
+    try {
+        return await axios.get(`${baseURL}/users`);
+    } catch (error) {
+        return error.message;
     }
 }
+
+
+// const getAll = async (data) => {
+//     const token = req.header('x-auth-token');
+  
+//     if (token) {
+//       try {
+//         const response = await axios.get(`${authServer}/api/profiles`, {
+//           headers: { 'x-auth-token': token },
+//         });
+  
+//         return response;
+//       } catch (error) {
+//         console.error(error.response.data);
+//         return error.response.data;
+//       }
+//     } else {
+//       return { errors: { msg: 'No token, authorization denied' } };
+//     }
+// }
 
 
 module.exports = router;
