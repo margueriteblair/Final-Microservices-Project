@@ -3,8 +3,8 @@ Final project centered around processing a large data set, incorporating microse
 
 Technologies used:
 
-Frontend: React
-API Gateway: NodeJS
-Microservices: Java
-Data processing: Python/ML
+Frontend: React<br>
+API Gateway: NodeJS<br>
+Microservices: Java-based<br>
+Data processing: Python/ML<br>
 
