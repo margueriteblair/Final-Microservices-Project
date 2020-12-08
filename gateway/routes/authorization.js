@@ -24,6 +24,7 @@ router.post("/", async (req, res) => {
                 break;
             case "deleteUser":
                 res.json(await deleteUser(data))
+                break;
             default:
                 return res.status(404).json({errors: {action: "Invalid action"}});
         }
@@ -92,7 +93,6 @@ const getAll = async () => {
 
 const deleteUser = async (data) => {
     try {
-        //id=5fcf2c9dac18891c385e852c
         let response = await axios.delete(`${baseURL}/user?id=${data.id}`);
         return response.data;
     } catch (error) {
