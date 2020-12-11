@@ -4,6 +4,7 @@ package com.margieblair.controller;
 import com.margieblair.model.User;
 import com.margieblair.service.UserService;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Key;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -44,15 +48,35 @@ public class UserController {
     }
 
     @PutMapping("/user")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public String loginUser(@RequestBody User user) {
         User newUser = userService.updateUser(user);
         try{
-            User attemptedLoginUser = userService.getUserByEmail(user.getEmail());
-            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+            User loginUser = userService.getUserByEmail(user.getEmail());
+            String unhashedPW = user.getPassword();
+            String hashedPW = loginUser.getPassword();
+            boolean isMatchingCredentials = BCrypt.checkpw(unhashedPW, hashedPW);
+            if (!isMatchingCredentials) {
+                System.out.println("Login failed: credentials do not match!");
+                return "Login failed: credentials do not match!";
+            }
+            //now that we know the passwords match, we can incorporate a JWT
+            Instant now = Instant.now();
+            Date issuedAt = Date.from(now);
+            Date expiresAt = Date.from(now.plus(2, ChronoUnit.HOURS));
+//            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+            String jwt = Jwts.builder()
+                    .setSubject("jwt-auth")
+                    .setIssuedAt(issuedAt)
+                    .setExpiration(expiresAt)
+                    .claim("id", loginUser.getId())
+                    .claim("email", loginUser.getEmail())
+                    .signWith(getSigningKey(), SignatureAlgorithm.ES256)
+                    .compact();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+//        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 
     }
 
