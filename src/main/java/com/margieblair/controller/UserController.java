@@ -3,11 +3,15 @@ package com.margieblair.controller;
 
 import com.margieblair.model.User;
 import com.margieblair.service.UserService;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Key;
 import java.util.List;
 
 @RestController
@@ -15,6 +19,14 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Value("${jwt.key}")
+    private String secret;
+
+    private Key getSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
