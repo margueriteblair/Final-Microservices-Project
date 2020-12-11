@@ -37,6 +37,7 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<User> saveNewUser(@RequestBody User user) {
         User newUser = userService.saveUser(user);
+        String hashedPW = Bcrypt
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
