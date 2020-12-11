@@ -3,17 +3,17 @@ package com.margieblair.controller;
 
 import com.margieblair.model.User;
 import com.margieblair.service.UserService;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -25,13 +25,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Value("${jwt.key}")
-    private String secret;
-
-    private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secret);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
+    @Autowired
+    Environment env;
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
@@ -65,13 +60,16 @@ public class UserController {
             Instant now = Instant.now();
             Date issuedAt = Date.from(now);
             Date expiresAt = Date.from(now.plus(2, ChronoUnit.HOURS));
+
+            SecretKey key = Keys.hmacShaKeyFor(env.getProperty("jwt.key").getBytes());
+
             String jwt = Jwts.builder()
                     .setSubject("jwt-auth")
                     .setIssuedAt(issuedAt)
                     .setExpiration(expiresAt)
                     .claim("id", loginUser.getId())
                     .claim("email", loginUser.getEmail())
-                    .signWith(getSigningKey(), SignatureAlgorithm.ES256)
+                    .signWith(key, SignatureAlgorithm.ES256)
                     .compact();
             return jwt;
         } catch (Exception ex) {
@@ -84,7 +82,8 @@ public class UserController {
     @GetMapping("/testjwt")
     public String testJWT(@RequestBody String jwt) {
         try {
-            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(jwt);
+            SecretKey key = Keys.hmacShaKeyFor(env.getProperty("jwt.key").getBytes());
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
             return "Valid JWT";
         } catch (Exception ex) {
             ex.printStackTrace();
