@@ -48,8 +48,6 @@ public class UserController {
             User loginUser = userService.getUserByEmail(user.getEmail());
             String unhashedPW = user.getPassword();
             String hashedPW = loginUser.getPassword();
-            System.out.println("Regular PW: " + unhashedPW);
-            System.out.println("Hashed: " + hashedPW);
             boolean isMatchingCredentials = BCrypt.checkpw(unhashedPW, hashedPW);
             if (!isMatchingCredentials) {
                 System.out.println("Login failed: credentials do not match!");
@@ -79,7 +77,7 @@ public class UserController {
     }
 
     @GetMapping("/testjwt")
-    public String testJWT(@RequestBody String jwt) {
+    public String testJWT(@RequestHeader String jwt) {
         try {
             SecretKey key = Keys.hmacShaKeyFor(env.getProperty("jwt.key").getBytes());
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
