@@ -79,6 +79,17 @@ public class UserController {
 
     }
 
+    @GetMapping("/testjwt")
+    public String testJWT(@RequestBody String jwt) {
+        try {
+            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(jwt);
+            return "Valid JWT";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "Invalid JWT";
+        }
+    }
+
     @DeleteMapping("/user")
     public ResponseEntity<String> deleteStudent(@RequestParam(name="id") String id) {
         String message = userService.getUserToDelete(id);
