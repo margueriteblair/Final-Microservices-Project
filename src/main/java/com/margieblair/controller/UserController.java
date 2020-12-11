@@ -4,7 +4,6 @@ package com.margieblair.controller;
 import com.margieblair.model.User;
 import com.margieblair.service.UserService;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -69,7 +68,7 @@ public class UserController {
                     .setExpiration(expiresAt)
                     .claim("id", loginUser.getId())
                     .claim("email", loginUser.getEmail())
-                    .signWith(key, SignatureAlgorithm.ES256)
+                    .signWith(key)
                     .compact();
             return jwt;
         } catch (Exception ex) {
