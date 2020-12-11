@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<User> saveNewUser(@RequestBody User user) {
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
         String hashedPW = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(hashedPW);
         User newUser = userService.saveUser(user);
@@ -54,6 +54,8 @@ public class UserController {
             User loginUser = userService.getUserByEmail(user.getEmail());
             String unhashedPW = user.getPassword();
             String hashedPW = loginUser.getPassword();
+            System.out.println("Regular PW: " + unhashedPW);
+            System.out.println("Hashed: " + hashedPW);
             boolean isMatchingCredentials = BCrypt.checkpw(unhashedPW, hashedPW);
             if (!isMatchingCredentials) {
                 System.out.println("Login failed: credentials do not match!");
