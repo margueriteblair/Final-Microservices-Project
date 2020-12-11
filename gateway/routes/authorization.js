@@ -118,6 +118,7 @@ const deleteUser = async (data) => {
 //     } else {
 //       return { errors: { msg: 'No token, authorization denied' } };
 //     }
+// final static String regularExpression = "[a-z]{1,6}\\_?[0-9]{0,4}
 // }
 
 
