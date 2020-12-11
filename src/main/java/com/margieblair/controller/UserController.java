@@ -63,7 +63,6 @@ public class UserController {
             Instant now = Instant.now();
             Date issuedAt = Date.from(now);
             Date expiresAt = Date.from(now.plus(2, ChronoUnit.HOURS));
-//            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
             String jwt = Jwts.builder()
                     .setSubject("jwt-auth")
                     .setIssuedAt(issuedAt)
@@ -72,11 +71,11 @@ public class UserController {
                     .claim("email", loginUser.getEmail())
                     .signWith(getSigningKey(), SignatureAlgorithm.ES256)
                     .compact();
-
+            return jwt;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return "failed";
         }
-//        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 
     }
 
