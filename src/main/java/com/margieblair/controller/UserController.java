@@ -44,6 +44,7 @@ public class UserController {
         String hashedPW = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(hashedPW);
         User newUser = userService.saveUser(user);
+        System.out.println(newUser);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
