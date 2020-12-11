@@ -18,8 +18,6 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    BCrypt
-
     @Autowired
     UserService userService;
 
@@ -47,12 +45,14 @@ public class UserController {
 
     @PutMapping("/user")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
+        User newUser = userService.updateUser(user);
         try{
-            User newUser = userService.updateUser(user);
+            User attemptedLoginUser = userService.getUserByEmail(user.getEmail());
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 
     }
 

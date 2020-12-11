@@ -15,6 +15,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User getUserByEmail(String email) {
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email));
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new EntityNotFoundException("Cannot find any user with the given credentials");
+    }
+
 
     public User getUserById(String id) {
         Optional<User> user = userRepository.findById(id);
