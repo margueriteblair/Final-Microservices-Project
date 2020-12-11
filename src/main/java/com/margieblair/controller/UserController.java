@@ -50,7 +50,6 @@ public class UserController {
 
     @PutMapping("/user")
     public String loginUser(@RequestBody User user) {
-        User newUser = userService.updateUser(user);
         try{
             User loginUser = userService.getUserByEmail(user.getEmail());
             String unhashedPW = user.getPassword();
