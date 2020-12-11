@@ -39,16 +39,21 @@ public class UserController {
 
     @PostMapping("/user")
     public ResponseEntity<User> saveNewUser(@RequestBody User user) {
-        User newUser = userService.saveUser(user);
         String hashedPW = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-
+        user.setPassword(hashedPW);
+        User newUser = userService.saveUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @PutMapping("/user")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        User newUser = userService.updateUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        try{
+            User newUser = userService.updateUser(user);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     @DeleteMapping("/user")
