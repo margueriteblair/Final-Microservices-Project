@@ -1,7 +1,7 @@
 # Final-Microservices-Project
-Final project centered around processing a large data set, incorporating microservices for more efficient code.
+<h2>Final project centered around processing a large data set, incorporating microservices for more efficient code.</h2>
 
-Technologies used:
+<h3>Technologies used:</h3>
 
 Frontend: React<br>
 API Gateway: NodeJS<br>
