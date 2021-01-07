@@ -5,7 +5,8 @@
 
 Frontend: React<br>
 API Gateway: NodeJS<br>
-Microservices: Java-based<br>
+Batch Processor: Java & Springboot<br>
+User Authorization Service: Java & Springboot<br>
 Data analysis: Python/ML<br>
 
 Related repos:
