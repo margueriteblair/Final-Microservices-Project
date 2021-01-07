@@ -9,6 +9,6 @@ Microservices: Java-based<br>
 Data analysis: Python/ML<br>
 
 Related repos:
-<a href="https://github.com/margueriteblair/Transaction-Fraud-Detection">Fraud Detection</a>
-<a href="https://github.com/margueriteblair/Big-Data-Processor">Data Processor</a>
+<h3><a href="https://github.com/margueriteblair/Transaction-Fraud-Detection">Fraud Detection</a><br></h3>
+<h3><a href="https://github.com/margueriteblair/Big-Data-Processor">Data Processor</a></h3>
 
