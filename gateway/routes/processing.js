@@ -4,7 +4,7 @@ const express = require("express");
 const { json } = require("body-parser");
 const router = express.Router();
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const {action, data} = req.body;
     try {
         switch(action) {
@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
     }
 });
 
-loadFinancialData = async () => {
+loadFinancialData = async (data) => {
     try {
         let response = await axios.get(`${PROCESSING_SERVER_BASE}/load`);
         return response.data;
