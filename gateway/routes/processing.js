@@ -9,18 +9,18 @@ router.post("/", (req, res) => {
     try {
         switch(action) {
             case "loadData":
-                res.json(await loadFinancialData())
+                res.json(loadFinancialData(data));
                 break;
         }
     } catch (error) {
         console.error(error);
         res.status(500).json(error);
     }
-})
+});
 
 loadFinancialData = async () => {
     try {
-        let response = await axios.post(`${PROCESSING_SERVER_BASE}/load`);
+        let response = await axios.get(`${PROCESSING_SERVER_BASE}/load`);
         return response.data;
     } catch (error) {
         console.error(error)
