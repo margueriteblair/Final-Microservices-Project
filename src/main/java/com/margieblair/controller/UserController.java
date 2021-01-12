@@ -77,7 +77,7 @@ public class UserController {
     }
 
     @GetMapping("/testjwt")
-    public boolean testJWT(@RequestHeader(value="auth-token") String jwt) {
+    public boolean testJWT(@RequestHeader(value="capstone-user-auth") String jwt) {
         try {
             SecretKey key = Keys.hmacShaKeyFor(env.getProperty("jwt.key").getBytes());
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
