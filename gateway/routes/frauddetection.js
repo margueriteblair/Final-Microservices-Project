@@ -17,7 +17,7 @@ router.post("/", async(req, res) => {
     }
 })
 
-runFraudDetection = () =>{
+runFraudDetection = () => {
     try {
         let response = await axios.get(`${baseURL}/api/fraud-det`);
         return response.data;
@@ -25,3 +25,5 @@ runFraudDetection = () =>{
         console.error(error);
     }
 }
+
+module.exports = router;
