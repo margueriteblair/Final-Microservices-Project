@@ -16,3 +16,9 @@ router.post("/", async(req, res) => {
         res.status(500).json(error);
     }
 })
+
+runFraudDetection = () =>{
+    try {
+        let response = await axios.get(`${baseURL}/`)
+    }
+}
