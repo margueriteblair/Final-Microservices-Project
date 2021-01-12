@@ -19,6 +19,9 @@ router.post("/", async(req, res) => {
 
 runFraudDetection = () =>{
     try {
-        let response = await axios.get(`${baseURL}/`)
+        let response = await axios.get(`${baseURL}/api/fraud-det`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
     }
 }
