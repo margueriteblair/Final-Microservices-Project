@@ -1,7 +1,6 @@
 const baseURL = process.env.PROCESSING_SERVER_BASE
 const {default: axios} = require("axios");
 const express = require("express");
-const { json } = require("body-parser");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -9,7 +8,7 @@ router.post("/", async (req, res) => {
     try {
         switch(action) {
             case "loadData":
-                res.json(loadFinancialData(data));
+                res.json(await loadFinancialData(data));
                 break;
         }
     } catch (error) {
@@ -18,12 +17,13 @@ router.post("/", async (req, res) => {
     }
 });
 
-loadFinancialData = async (data) => {
+loadFinancialData = async () => {
     try {
-        let response = await axios.get(`${PROCESSING_SERVER_BASE}/load`);
+        let response = await axios.get(`${baseURL}/load`);
         return response.data;
     } catch (error) {
         console.error(error)
-        res.status(500).json(error);
     }
 }
+
+module.exports = router;
