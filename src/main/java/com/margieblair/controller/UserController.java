@@ -77,11 +77,12 @@ public class UserController {
     }
 
     @GetMapping("/testjwt")
-    public boolean testJWT(@RequestHeader String jwt) {
+    public boolean testJWT(@RequestHeader(value="auth-token") String jwt) {
         try {
             SecretKey key = Keys.hmacShaKeyFor(env.getProperty("jwt.key").getBytes());
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
             return true;
+            //this code will fail if the key isn't actually signed
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
